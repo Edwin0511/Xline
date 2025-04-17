@@ -6,7 +6,8 @@ function App() {
   const nineLineRef = useRef<HTMLDivElement>(null);
   const fiveLineRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'locations' | 'imprint'>('locations');
+  const [currentPage, setCurrentPage] = useState<'locations' | 'gallery' | 'imprint'>('locations');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -15,6 +16,11 @@ function App() {
 
   const navigateToLocations = () => {
     setCurrentPage('locations');
+    setIsMobileMenuOpen(false);
+  };
+
+  const navigateToGallery = () => {
+    setCurrentPage('gallery');
     setIsMobileMenuOpen(false);
   };
 
@@ -30,6 +36,31 @@ function App() {
   const openFiveLineMenu = () => {
     window.open('/Speisekarte_FiveLine.pdf', '_blank');
   };
+
+  const openLightbox = (imageSrc: string) => {
+    setSelectedImage(imageSrc);
+  };
+
+  const closeLightbox = () => {
+    setSelectedImage(null);
+  };
+
+  const galleryImages = [
+    { src: 'https://i.imgur.com/yQDh8dP.jpeg', alt: 'Shisha Lounge Impression 1' },
+    { src: 'https://i.imgur.com/1tXXub0.jpeg', alt: 'Shisha Lounge Impression 2' },
+    { src: 'https://i.imgur.com/a2Y4bLl.jpeg', alt: 'Shisha Lounge Impression 3' },
+    { src: 'https://i.imgur.com/VairwFE.jpeg', alt: 'Shisha Lounge Impression 4' },
+    { src: 'https://i.imgur.com/tqyWaoF.jpeg', alt: 'Shisha Lounge Impression 5' },
+    { src: 'https://i.imgur.com/NcANCE0.jpeg', alt: 'Shisha Lounge Impression 6' },
+    { src: 'https://i.imgur.com/nxwdER8.jpeg', alt: 'Shisha Lounge Impression 7' },
+    { src: 'https://i.imgur.com/7uTLyye.jpeg', alt: 'Shisha Lounge Impression 8' },
+    { src: 'https://i.imgur.com/b1Yg6Bh.jpeg', alt: 'Shisha Lounge Impression 9' },
+    { src: 'https://i.imgur.com/EWAeqjp.jpeg', alt: 'Shisha Lounge Impression 10' },
+    { src: 'https://i.imgur.com/MNknBbH.jpeg', alt: 'Shisha Lounge Impression 11' },
+    { src: 'https://i.imgur.com/b4S2O9B.jpeg', alt: 'Shisha Lounge Impression 12' },
+    { src: 'https://i.imgur.com/9wAqulY.jpeg', alt: 'Shisha Lounge Impression 13' },
+    { src: 'https://i.imgur.com/BbT2h66.jpeg', alt: 'Shisha Lounge Impression 14' }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -47,6 +78,7 @@ function App() {
 
             <div className="hidden md:flex items-center space-x-8">
               <button onClick={navigateToLocations} className="text-white hover:text-purple-400">Startseite</button>
+              <button onClick={navigateToGallery} className="text-white hover:text-purple-400">Galerie</button>
               <button onClick={navigateToImprint} className="text-white hover:text-purple-400">
                 Impressum
               </button>
@@ -100,6 +132,7 @@ function App() {
           {isMobileMenuOpen && (
             <div className="md:hidden mt-4 py-2 border-t border-gray-700">
               <button onClick={navigateToLocations} className="block w-full text-left py-2 text-white hover:text-purple-400">Startseite</button>
+              <button onClick={navigateToGallery} className="block w-full text-left py-2 text-white hover:text-purple-400">Galerie</button>
               <button onClick={navigateToImprint} className="block w-full text-left py-2 text-white hover:text-purple-400">
                 Impressum
               </button>
@@ -263,7 +296,6 @@ function App() {
                   ></iframe>
                 </div>
 
-                {/* Parking Information */}
                 <div className="mt-4 p-4 bg-purple-600/10 border border-purple-400/20 rounded-lg">
                   <p className="text-white text-center">
                     Aufgrund einer Baustelle bitten wir Sie beim Parkplatz in der Aldengreverstraße zu Parken. 
@@ -369,6 +401,69 @@ function App() {
               </div>
             </div>
           </div>
+        ) : currentPage === 'gallery' ? (
+          <div className="pt-24 min-h-screen bg-gradient-to-b from-gray-900 to-purple-900">
+            <div className="container mx-auto px-4 py-12">
+              <div className="mb-16 rounded-2xl overflow-hidden shadow-2xl relative">
+                <video 
+                  className="w-full h-[50vh] md:h-[70vh] object-cover"
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="https://i.imgur.com/sIHBqPb.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent flex items-end justify-center pb-8">
+                  <h1 className="text-3xl md:text-5xl font-bold text-purple-400 text-center">
+                    Willkommen in unserer Welt
+                  </h1>
+                </div>
+              </div>
+
+              <div className="md:columns-3 md:gap-6 space-y-6 md:space-y-0">
+                {galleryImages.map((image, index) => (
+                  <div 
+                    key={index}
+                    className="relative group cursor-pointer overflow-hidden rounded-xl shadow-xl mb-6 md:mb-6 break-inside-avoid"
+                    onClick={() => openLightbox(image.src)}
+                  >
+                    <div className="aspect-[3/4] md:aspect-auto overflow-hidden">
+                      <img 
+                        src={image.src} 
+                        alt={image.alt}
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {selectedImage && (
+              <div 
+                className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                onClick={closeLightbox}
+              >
+                <div className="relative max-w-7xl w-full">
+                  <img 
+                    src={selectedImage} 
+                    alt="Enlarged view"
+                    className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
+                  />
+                  <button 
+                    className="absolute top-4 right-4 text-white hover:text-purple-400"
+                    onClick={closeLightbox}
+                  >
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         ) : (
           <div className="pt-24 min-h-screen bg-gradient-to-b from-gray-900 to-purple-900">
             <div className="container mx-auto px-4 py-12">
@@ -389,15 +484,24 @@ function App() {
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Vertreten durch</h2>
                       <p className="text-gray-300">
-                        Hanna Shahin
+                        [Name des Geschäftsführers]
                       </p>
                     </section>
 
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Kontakt</h2>
                       <p className="text-gray-300">
-                        Telefon: 01739191196<br />
-                        E-Mail: hasso.line@outlook.de
+                        Telefon: [Telefonnummer]<br />
+                        E-Mail: [E-Mail-Adresse]
+                      </p>
+                    </section>
+
+                    <section>
+                      <h2 className="text-xl font-semibold text-purple-400 mb-3">Registereintrag</h2>
+                      <p className="text-gray-300">
+                        Eintragung im Handelsregister.<br />
+                        Registergericht: [Ort]<br />
+                        Registernummer: [Nummer]
                       </p>
                     </section>
 
@@ -405,7 +509,7 @@ function App() {
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Umsatzsteuer-ID</h2>
                       <p className="text-gray-300">
                         Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br />
-                        33951923935
+                        [Umsatzsteuer-ID]
                       </p>
                     </section>
                   </div>
@@ -427,24 +531,32 @@ function App() {
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Vertreten durch</h2>
                       <p className="text-gray-300">
-                        Quanis Hasso
+                        [Name des Geschäftsführers]
                       </p>
                     </section>
 
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Kontakt</h2>
                       <p className="text-gray-300">
-                        Telefon: 01739191196<br />
-                        E-Mail: hasso.line@outlook.de
+                        Telefon: [Telefonnummer]<br />
+                        E-Mail: [E-Mail-Adresse]
                       </p>
                     </section>
 
-                    
+                    <section>
+                      <h2 className="text-xl font-semibold text-purple-400 mb-3">Registereintrag</h2>
+                      <p className="text-gray-300">
+                        Eintragung im Handelsregister.<br />
+                        Registergericht: [Ort]<br />
+                        Registernummer: [Nummer]
+                      </p>
+                    </section>
+
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Umsatzsteuer-ID</h2>
                       <p className="text-gray-300">
                         Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br />
-                        [Umsatzsteuer-ID in Arbeit]
+                        [Umsatzsteuer-ID]
                       </p>
                     </section>
                   </div>
