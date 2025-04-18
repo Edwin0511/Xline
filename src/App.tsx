@@ -538,7 +538,7 @@ function App() {
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Kontakt</h2>
                       <p className="text-gray-300">
-                        Telefon: [Telefonnummer]<br />
+                        Telefon: [Telefonnumme]<br />
                         E-Mail: [E-Mail-Adresse]
                       </p>
                     </section>
