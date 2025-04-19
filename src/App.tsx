@@ -484,24 +484,15 @@ function App() {
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Vertreten durch</h2>
                       <p className="text-gray-300">
-                        [Name des Geschäftsführers]
+                        Hanna Shahin
                       </p>
                     </section>
 
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Kontakt</h2>
                       <p className="text-gray-300">
-                        Telefon: [Telefonnummer]<br />
-                        E-Mail: [E-Mail-Adresse]
-                      </p>
-                    </section>
-
-                    <section>
-                      <h2 className="text-xl font-semibold text-purple-400 mb-3">Registereintrag</h2>
-                      <p className="text-gray-300">
-                        Eintragung im Handelsregister.<br />
-                        Registergericht: [Ort]<br />
-                        Registernummer: [Nummer]
+                        Telefon: 01739191196<br />
+                        E-Mail: hasso.line@outlook.de
                       </p>
                     </section>
 
@@ -509,7 +500,7 @@ function App() {
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Umsatzsteuer-ID</h2>
                       <p className="text-gray-300">
                         Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br />
-                        [Umsatzsteuer-ID]
+                        33951923935
                       </p>
                     </section>
                   </div>
@@ -531,24 +522,15 @@ function App() {
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Vertreten durch</h2>
                       <p className="text-gray-300">
-                        [Name des Geschäftsführers]
+                        Quanis Hasso
                       </p>
                     </section>
 
                     <section>
                       <h2 className="text-xl font-semibold text-purple-400 mb-3">Kontakt</h2>
                       <p className="text-gray-300">
-                        Telefon: [Telefonnumme]<br />
-                        E-Mail: [E-Mail-Adresse]
-                      </p>
-                    </section>
-
-                    <section>
-                      <h2 className="text-xl font-semibold text-purple-400 mb-3">Registereintrag</h2>
-                      <p className="text-gray-300">
-                        Eintragung im Handelsregister.<br />
-                        Registergericht: [Ort]<br />
-                        Registernummer: [Nummer]
+                        Telefon: 01739191196<br />
+                        E-Mail: hasso.line@outlook.de
                       </p>
                     </section>
 
